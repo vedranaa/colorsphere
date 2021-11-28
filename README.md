@@ -11,4 +11,4 @@ coloring = colorsphere.Ico()
 
 
 ```
-![](https://github.com/vedranaa/icosphere/raw/main/Figure.png)
+![](https://github.com/vedranaa/colorsphere/raw/main/Figure.png)
