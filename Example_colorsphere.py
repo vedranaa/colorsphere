@@ -1,5 +1,5 @@
-import icosphere
 import colorsphere
+from icosphere import icosphere
 import numpy as np
 
 import matplotlib.pyplot as plt
@@ -7,7 +7,7 @@ import mpl_toolkits.mplot3d
  
 
 nu = 15
-vertices, faces = icosphere.icosphere(nu)
+vertices, faces = icosphere(nu)
 face_vectors = vertices[faces].sum(axis=1)
 face_vectors /= np.sqrt((face_vectors**2).sum(axis=1, keepdims=True))
 
