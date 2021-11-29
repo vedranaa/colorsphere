@@ -7,8 +7,11 @@ Clone the repository.
 ## Use
 ``` python
 import colorsphere
-coloring = colorsphere.Ico()
+import numpy as np
 
-
+vectors = np.random.standard_normal(size=(1000,3))
+coloring = colorsphere.Ico() 
+colors = coloring(vectors)
 ```
+
 ![](https://github.com/vedranaa/colorsphere/raw/main/Figure.png)
