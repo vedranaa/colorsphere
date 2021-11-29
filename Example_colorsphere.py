@@ -1,10 +1,70 @@
-import colorsphere
-from icosphere import icosphere
-import numpy as np
+'''
+Colorsphere shown on points in 3D.
+'''
 
+import colorsphere
+import numpy as np
 import matplotlib.pyplot as plt
 import mpl_toolkits.mplot3d 
- 
+
+
+vectors = np.random.standard_normal(size=(1000,3))
+coloring = colorsphere.Ico() 
+colors = coloring(vectors)
+
+fig = plt.figure()
+ax = fig.add_subplot(projection='3d')
+ax.scatter(vectors[:,0], vectors[:,1], vectors[:,2], color=colors)
+
+
+#%%
+'''
+Using z_direction to orientat colorsphere
+'''
+
+z_dirs = [[0, 0.1, 0.9], [0.5, 0.5, 0], [0.3, 0.4, 0.5]]
+
+colorings = [colorsphere.Duo(z_direction = z_dir) for z_dir in z_dirs]  
+
+s = 7.5
+
+fig = plt.figure()
+
+for i in range(3):
+    
+    ax = fig.add_subplot(1, 3, i+1, projection='3d')                      
+    colors = colorings[i](vectors)
+    ax.scatter(vectors[:,0], vectors[:,1], vectors[:,2], color=colors)
+    
+    ax.plot([-s*z_dirs[i][0], s*z_dirs[i][0]], 
+            [-s*z_dirs[i][1], s*z_dirs[i][1]], 
+            [-s*z_dirs[i][2], s*z_dirs[i][2]], 
+            'k', linewidth=2)
+    
+#%%
+'''
+Using ordering to permute axis
+'''
+
+ords = [[2, 0, 1], [0, 2, 1], [1, 0, 2]] 
+colorings = [colorsphere.Uno(ordering = o) for o in ords]  
+
+fig = plt.figure()
+
+for i in range(3):
+    
+    ax = fig.add_subplot(1, 3, i+1, projection='3d')                      
+    colors = colorings[i](vectors)
+    ax.scatter(vectors[:,0], vectors[:,1], vectors[:,2], color=colors)
+    
+
+
+#%%
+'''
+Colorsphere shown on icosphere.
+''' 
+
+from icosphere import icosphere
 
 nu = 15
 vertices, faces = icosphere(nu)
@@ -19,6 +79,8 @@ colorings = [colorsphere.Uno(),
              colorsphere.Duo(),
              colorsphere.Tre(),
              colorsphere.Ico()]
+
+names = ['Uno', 'Duo', 'Tre', 'Ico']
 
 for i in range(4):
     
@@ -44,6 +106,10 @@ for i in range(4):
     ax.set_xticks([-1,0,1])
     ax.set_yticks([-1,0,1])
     ax.set_zticks([-1,0,1])
+    
+    ax.set_title(names[i], x=0.1, y =0.9)
+    
+plt.show()
 
 
 

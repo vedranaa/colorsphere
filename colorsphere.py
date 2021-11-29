@@ -4,19 +4,22 @@ import matplotlib.cm as c
 
 class Coloring():
     
-    def __init__(self, ordering=None, rotation=None, z_direction=None):
-        self.ordering = ordering
+    def __init__(self, z_direction=None, rotation=None, ordering=None):
         self.rotation = rotation
         if self.rotation is None and z_direction is not None:
             self.rotation = get_rotation(z_direction)
-    
+        self.ordering = ordering
+        
     def __call__(self, vectors):
         
         if self.ordering is not None:
             vectors = vectors[:,self.ordering]
         if self.rotation is not None:
             vectors =  vectors @ self.rotation.T
-        return self.color(vectors)
+        
+        vectors_norm = vectors/np.sqrt((vectors**2).sum(axis=1, keepdims=True))
+        return self.color(vectors_norm)
+    
         
 
 class Tre(Coloring):
