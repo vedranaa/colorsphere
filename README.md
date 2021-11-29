@@ -13,5 +13,7 @@ vectors = np.random.standard_normal(size=(1000,3))
 coloring = colorsphere.Ico() 
 colors = coloring(vectors)
 ```
+![](https://github.com/vedranaa/colorsphere/raw/main/Figure1.png)
 
-![](https://github.com/vedranaa/colorsphere/raw/main/Figure.png)
+## Different colorspheres
+![](https://github.com/vedranaa/colorsphere/raw/main/Figure2.png)
