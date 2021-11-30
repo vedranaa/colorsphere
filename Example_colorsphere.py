@@ -19,7 +19,7 @@ ax.scatter(vectors[:,0], vectors[:,1], vectors[:,2], color=colors)
 
 #%%
 '''
-Using z_direction to orientat colorsphere
+Using z_direction to orient colorsphere.
 '''
 
 z_dirs = [[0, 0.1, 0.9], [0.5, 0.5, 0], [0.3, 0.4, 0.5]]
@@ -43,7 +43,7 @@ for i in range(3):
     
 #%%
 '''
-Using ordering to permute axis
+Using ordering to permute axis.
 '''
 
 ords = [[2, 0, 1], [0, 2, 1], [1, 0, 2]] 
