@@ -1,5 +1,5 @@
 # colorsphere
-Assigns rgb colors to orientations in 3D.
+Assigns rgb colors to points on sphere (orientations in 3D).
 
 ## Installation
 Clone the repository.
