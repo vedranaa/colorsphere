@@ -1,4 +1,4 @@
-# sphere-colormap
+# scmap 
 Assigns rgb colors to points on sphere (orientations in 3D).
 
 ## Installation
