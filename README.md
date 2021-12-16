@@ -2,7 +2,7 @@
 Assigns rgb colors to points on sphere (orientations in 3D).
 
 ## Installation
-Clone the repository.
+Install the module using ```pip install scmap``` or clone the repository.
 
 ## Use
 The simplest example involves coloring random 3D vectors.
