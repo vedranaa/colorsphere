@@ -1,5 +1,5 @@
 import numpy as np
-import matplotlib.cm as c
+import matplotlib.cm 
 
 
 class Coloring():
@@ -39,7 +39,7 @@ class Uno(Coloring):
     Orientations in orhogonal (x-y) plane are gray. Orientations in 
     predominant directions are white.
     (Uno as for unidirectional.)
-    '''
+    ''' 
     
     def color(self, vectors):
         
@@ -48,27 +48,27 @@ class Uno(Coloring):
         h_pole = vectors[:,2]**2
         h_pole = h_pole[:,None]
         h_equator = 1-h_pole
-        colors = c.hsv(s/(2*np.pi))[:,:3]
+        colors = matplotlib.cm.hsv(s/(2*np.pi))[:,:3]
         h_pole = h_pole**8
         colors = colors * (1 - h_pole) + 1 * h_pole
         h_equator = h_equator**8
         colors = colors * (1 - h_equator) + 0.25 * h_equator
         return colors
-
+    
 
 class Duo(Coloring):
     '''
     Suitable for coloring vectors predominantly in a x-y plane. Orientations
     in z direction are gray.
     (Duo as for two directions i.e. plane.)
-    '''
-           
+    '''  
+            
     def color(self, vectors):
         
         h = vectors[:,2]**2  # no discontinuity and less gray
         h = h[:,None]
         s = np.mod(np.arctan2(vectors[:,1], vectors[:,0]), np.pi)
-        colors = c.hsv(s/np.pi)[:,:3] * (1-h) + 0.5*h
+        colors = matplotlib.cm.hsv(s/np.pi)[:,:3] * (1-h) + 0.5*h
         return colors
 
 
@@ -78,9 +78,9 @@ class Ico(Coloring):
     (Ico as for icosahedron-based.)
     '''
     
-    def __init__(self, ordering=None, rotation=None):
+    def __init__(self, z_direction=None, rotation=None, ordering=None):
         
-        super().__init__(ordering, rotation)    
+        super().__init__(z_direction, rotation, ordering)    
         phi = (1+np.sqrt(5))/2    
         vertices = np.array([
             [0, 1, phi], [0,-1, phi], [1, phi, 0],
@@ -122,6 +122,61 @@ class Ico(Coloring):
         
         return rgb
 
+class Inc(Coloring):
+    '''
+    Coloring based on inclination.
+    '''
+    
+    def __init__(self, z_direction=None, rotation=None, ordering=None, 
+                 cmap=None, symmetric = True):
+        
+        if cmap is None:
+            self.cmap = matplotlib.cm.jet
+        else:
+            self.cmap = cmap
+
+        self.symmetric = symmetric
+        super().__init__(z_direction, rotation, ordering)    
+    
+    def color(self, vectors):
+        
+        inc = np.arcsin(vectors[:,2])/(0.5*np.pi)  # from -1 to 1 
+        if self.symmetric:
+            inc = abs(inc) 
+        else:
+            inc = 0.5*(inc+1)
+            
+        colors = self.cmap(inc)[:,:3]
+        return colors
+    
+
+class Azy(Coloring):
+    '''
+    Coloring based on azymuth.
+    '''
+    
+    def __init__(self, z_direction=None, rotation=None, ordering=None,
+                 cmap=None, symmetric = True):
+        
+        if cmap is None:
+            self.cmap = matplotlib.cm.hsv
+        else:
+            self.cmap = cmap
+            
+        self.symmetric = symmetric
+        super().__init__(z_direction, rotation, ordering)    
+    
+    def color(self, vectors):
+        
+        a = np.arctan2(vectors[:,1], vectors[:,0])/np.pi     # from -1 to 1 
+        if self.symmetric:
+            a = np.mod(a, 1)
+        else:
+            a = 0.5*(a+1)
+       
+        colors = self.cmap(a)[:,:3]
+        return colors
+    
 
 def get_rotation(z, y=None):
     '''
