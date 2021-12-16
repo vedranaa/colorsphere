@@ -1,5 +1,5 @@
-# colorsphere
-Assigns rgb colors to orientations in 3D.
+# sphere-colormap
+Assigns rgb colors to points on sphere (orientations in 3D).
 
 ## Installation
 Clone the repository.
@@ -7,11 +7,11 @@ Clone the repository.
 ## Use
 The simplest example involves coloring random 3D vectors.
 ``` python
-import colorsphere
+import scmap
 import numpy as np
 
 vectors = np.random.standard_normal(size=(1000,3))
-coloring = colorsphere.Ico() 
+coloring = scmap.Ico() 
 colors = coloring(vectors)
 ```
 
