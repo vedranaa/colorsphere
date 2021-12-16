@@ -1,8 +1,8 @@
 '''
-Colorsphere shown on points in 3D.
+Sphere colormap shown on points in 3D.
 '''
 
-import colorsphere
+import scmap
 import numpy as np
 import matplotlib.pyplot as plt
 import mpl_toolkits.mplot3d
@@ -10,7 +10,7 @@ import matplotlib.cm
 
 
 vectors = np.random.standard_normal(size=(1000,3))
-coloring = colorsphere.Ico() 
+coloring = scmap.Ico() 
 colors = coloring(vectors)
 
 fig = plt.figure()
@@ -20,12 +20,12 @@ ax.scatter(vectors[:,0], vectors[:,1], vectors[:,2], color=colors)
 
 #%%
 '''
-Using z_direction to orient colorsphere.
+Using z_direction to orient sphere colormap.
 '''
 
 z_dirs = [[0, 0.1, 0.9], [0.5, 0.5, 0], [0.3, 0.4, 0.5]]
 
-colorings = [colorsphere.Duo(z_direction = z_dir) for z_dir in z_dirs]  
+colorings = [scmap.Duo(z_direction = z_dir) for z_dir in z_dirs]  
 
 s = 7.5
 
@@ -48,7 +48,7 @@ Using ordering to permute axis.
 '''
 
 ords = [[2, 0, 1], [0, 2, 1], [1, 0, 2]] 
-colorings = [colorsphere.Uno(ordering = o) for o in ords]  
+colorings = [scmap.Uno(ordering = o) for o in ords]  
 
 fig = plt.figure()
 
@@ -62,7 +62,7 @@ for i in range(3):
 
 #%%
 '''
-Colorsphere shown on icosphere.
+Sphere colormap shown on icosphere.
 ''' 
 
 from icosphere import icosphere
@@ -76,10 +76,10 @@ face_vectors /= np.sqrt((face_vectors**2).sum(axis=1, keepdims=True))
 fig = plt.figure()
 
 
-colorings = [colorsphere.Uno(), 
-             colorsphere.Duo(),
-             colorsphere.Tre(),
-             colorsphere.Ico()]
+colorings = [scmap.Uno(), 
+             scmap.Duo(),
+             scmap.Tre(),
+             scmap.Ico()]
 
 names = ['Uno', 'Duo', 'Tre', 'Ico']
 
@@ -114,15 +114,15 @@ plt.show()
 
 #%%
 '''
-Colorsphere based on inclination and azymuth.
+Sphere colormap based on inclination and azymuth.
 ''' 
 
 fig = plt.figure()
 
-colorings = [colorsphere.Inc(), 
-             colorsphere.Inc(symmetric=False),
-             colorsphere.Azy(),
-             colorsphere.Azy(symmetric=False)]
+colorings = [scmap.Inc(), 
+             scmap.Inc(symmetric=False),
+             scmap.Azy(),
+             scmap.Azy(symmetric=False)]
 
 names = ['Inc symmetric', 'Inc asymmetric', 'Azy symmetric', 'Azy asymmetric']
 
@@ -157,7 +157,7 @@ plt.show()
 
 #%%
 '''
-Colorsphere based on inclination and azymuth with alternative colormaps.
+Sphere colormap based on inclination and azymuth with alternative colormaps.
 ''' 
 
 
@@ -166,10 +166,10 @@ fig = plt.figure()
 newcolors = matplotlib.cm.plasma(np.linspace(0, 1, 256)**2)
 custom = matplotlib.colors.ListedColormap(newcolors)
 
-colorings = [colorsphere.Inc(cmap=matplotlib.cm.viridis),
-             colorsphere.Inc(cmap=custom),
-             colorsphere.Inc(cmap=matplotlib.cm.seismic, symmetric=False),
-             colorsphere.Azy(cmap=matplotlib.cm.twilight)]
+colorings = [scmap.Inc(cmap=matplotlib.cm.viridis),
+             scmap.Inc(cmap=custom),
+             scmap.Inc(cmap=matplotlib.cm.seismic, symmetric=False),
+             scmap.Azy(cmap=matplotlib.cm.twilight)]
 
 names = ['Inc with viridis', 'Inc with squared plasma', 
          'Asymmetric inc with seismic', 'Azy with twilight']

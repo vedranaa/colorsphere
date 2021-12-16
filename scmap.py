@@ -2,7 +2,7 @@ import numpy as np
 import matplotlib.cm 
 
 
-class Coloring():
+class SCmap():
     
     def __init__(self, z_direction=None, rotation=None, ordering=None):
         self.rotation = rotation
@@ -22,9 +22,9 @@ class Coloring():
     
         
 
-class Tre(Coloring):
+class Tre(SCmap):
     '''
-    Suitable for coloring vectors which are interpretable as: 'mostly x', 
+    Suitable for SCmap vectors which are interpretable as: 'mostly x', 
     'mostly y' or 'mostly z'.'
     (Tre as for three axes.)
     '''
@@ -33,9 +33,9 @@ class Tre(Coloring):
         return np.abs(vectors)
     
 
-class Uno(Coloring):
+class Uno(SCmap):
     '''
-    Suitable for coloring vectors predominantly in one (z) direction. 
+    Suitable for SCmap vectors predominantly in one (z) direction. 
     Orientations in orhogonal (x-y) plane are gray. Orientations in 
     predominant directions are white.
     (Uno as for unidirectional.)
@@ -56,9 +56,9 @@ class Uno(Coloring):
         return colors
     
 
-class Duo(Coloring):
+class Duo(SCmap):
     '''
-    Suitable for coloring vectors predominantly in a x-y plane. Orientations
+    Suitable for SCmap vectors predominantly in a x-y plane. Orientations
     in z direction are gray.
     (Duo as for two directions i.e. plane.)
     '''  
@@ -72,9 +72,9 @@ class Duo(Coloring):
         return colors
 
 
-class Ico(Coloring):
+class Ico(SCmap):
     '''
-    Suitable for coloring vectors with no known predominant orientations.
+    Suitable for SCmap vectors with no known predominant orientations.
     (Ico as for icosahedron-based.)
     '''
     
@@ -122,9 +122,9 @@ class Ico(Coloring):
         
         return rgb
 
-class Inc(Coloring):
+class Inc(SCmap):
     '''
-    Coloring based on inclination.
+    SCmap based on inclination.
     '''
     
     def __init__(self, z_direction=None, rotation=None, ordering=None, 
@@ -150,9 +150,9 @@ class Inc(Coloring):
         return colors
     
 
-class Azy(Coloring):
+class Azy(SCmap):
     '''
-    Coloring based on azymuth.
+    SCmap based on azymuth.
     '''
     
     def __init__(self, z_direction=None, rotation=None, ordering=None,
