@@ -10,13 +10,16 @@ import matplotlib.cm
 
 
 vectors = np.random.standard_normal(size=(1000,3))
+vectors /= np.sqrt((vectors**2).sum(axis=1, keepdims=True))
 coloring = scmap.Ico() 
 colors = coloring(vectors)
 
 fig = plt.figure()
 ax = fig.add_subplot(projection='3d')
 ax.scatter(vectors[:,0], vectors[:,1], vectors[:,2], color=colors)
-
+ax.set_xlim(-1, 1)
+ax.set_ylim(-1, 1)
+ax.set_zlim(-1, 1)
 
 #%%
 '''
@@ -41,6 +44,9 @@ for i in range(3):
             [-s*z_dirs[i][1], s*z_dirs[i][1]], 
             [-s*z_dirs[i][2], s*z_dirs[i][2]], 
             'k', linewidth=2)
+    ax.set_xlim(-1, 1)
+    ax.set_ylim(-1, 1)
+    ax.set_zlim(-1, 1)
     
 #%%
 '''
@@ -57,9 +63,10 @@ for i in range(3):
     ax = fig.add_subplot(1, 3, i+1, projection='3d')                      
     colors = colorings[i](vectors)
     ax.scatter(vectors[:,0], vectors[:,1], vectors[:,2], color=colors)
+    ax.set_xlim(-1, 1)
+    ax.set_ylim(-1, 1)
+    ax.set_zlim(-1, 1)
     
-
-
 #%%
 '''
 Sphere colormap shown on icosphere.
