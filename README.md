@@ -11,6 +11,7 @@ import scmap
 import numpy as np
 
 vectors = np.random.standard_normal(size=(1000,3))
+vectors /= np.sqrt((vectors**2).sum(axis=1, keepdims=True))
 coloring = scmap.Ico() 
 colors = coloring(vectors)
 ```
