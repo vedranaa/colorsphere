@@ -3,6 +3,15 @@ import matplotlib.cm
 
 
 class SCmap():
+    '''
+    Base class for all spherical colormaps.
+    
+    SCmap is callable, it takes as input an array of shape (3, :) containing 
+    coordinates x, y, and z. It returns an array of shape (3, :) containing
+    colors r, g, and b.
+    
+    '''
+    
     
     def __init__(self, z_direction=None, rotation=None, ordering=None):
         self.rotation = rotation
