@@ -1,5 +1,5 @@
+import matplotlib.cm
 import numpy as np
-import matplotlib.cm 
 
 
 class SCmap():
