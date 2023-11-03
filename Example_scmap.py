@@ -34,10 +34,10 @@ s = 7.5
 
 fig = plt.figure()
 
-for i in range(3):
+for i, coloring in enumerate(colorings) :
     
     ax = fig.add_subplot(1, 3, i+1, projection='3d')                      
-    colors = colorings[i](vectors)
+    colors = coloring(vectors)
     ax.scatter(vectors[:,0], vectors[:,1], vectors[:,2], color=colors)
     
     ax.plot([-s*z_dirs[i][0], s*z_dirs[i][0]], 
@@ -58,10 +58,10 @@ colorings = [scmap.Uno(ordering = o) for o in ords]
 
 fig = plt.figure()
 
-for i in range(3):
+for i, coloring in enumerate(colorings):   
     
     ax = fig.add_subplot(1, 3, i+1, projection='3d')                      
-    colors = colorings[i](vectors)
+    colors = coloring(vectors)
     ax.scatter(vectors[:,0], vectors[:,1], vectors[:,2], color=colors)
     ax.set_xlim(-1, 1)
     ax.set_ylim(-1, 1)
@@ -88,13 +88,11 @@ colorings = [scmap.Uno(),
              scmap.Tre(),
              scmap.Ico()]
 
-names = ['Uno', 'Duo', 'Tre', 'Ico']
-
-for i in range(4):
+for i, coloring in enumerate(colorings):
     
     ax = fig.add_subplot(2, 2, i+1, projection='3d')                  
     
-    face_colors = colorings[i](face_vectors)
+    face_colors = coloring(face_vectors)
     
     poly = mpl_toolkits.mplot3d.art3d.Poly3DCollection(vertices[faces])
     poly.set_facecolor(face_colors) 
@@ -115,7 +113,7 @@ for i in range(4):
     ax.set_yticks([-1,0,1])
     ax.set_zticks([-1,0,1])
     
-    ax.set_title(names[i], x=0.1, y =0.9)
+    ax.set_title(coloring.name, x=0.1, y =0.9)
     
 plt.show()
 

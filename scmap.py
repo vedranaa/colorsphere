@@ -11,7 +11,7 @@ class SCmap():
     colors r, g, and b.
     
     '''
-    
+    name = 'SCmap'
     
     def __init__(self, z_direction=None, rotation=None, ordering=None):
         self.rotation = rotation
@@ -29,6 +29,7 @@ class SCmap():
         vectors_norm = vectors/np.sqrt((vectors**2).sum(axis=1, keepdims=True))
         return self.color(vectors_norm)
     
+    
         
 
 class Tre(SCmap):
@@ -37,6 +38,8 @@ class Tre(SCmap):
     'mostly y' or 'mostly z'.'
     (Tre as for three axes.)
     '''
+    
+    name = 'Tre'
             
     def color(self, vectors):
         return np.abs(vectors)
@@ -50,6 +53,8 @@ class Uno(SCmap):
     (Uno as for unidirectional.)
     ''' 
     
+    name = 'Uno'
+
     def color(self, vectors):
         
         s = np.mod(np.arctan2(vectors[:,1], vectors[:,0]) + 
@@ -71,6 +76,8 @@ class Duo(SCmap):
     in z direction are gray.
     (Duo as for two directions i.e. plane.)
     '''  
+
+    name = 'Duo'
             
     def color(self, vectors):
         
@@ -86,6 +93,8 @@ class Ico(SCmap):
     Suitable for SCmap vectors with no known predominant orientations.
     (Ico as for icosahedron-based.)
     '''
+
+    name = 'Ico'
     
     def __init__(self, z_direction=None, rotation=None, ordering=None):
         
@@ -136,6 +145,8 @@ class Inc(SCmap):
     SCmap based on inclination.
     '''
     
+    name = 'Inc'
+
     def __init__(self, z_direction=None, rotation=None, ordering=None, 
                  cmap=None, symmetric = True):
         
@@ -163,6 +174,8 @@ class Azy(SCmap):
     '''
     SCmap based on azymuth.
     '''
+
+    name = 'Azy'
     
     def __init__(self, z_direction=None, rotation=None, ordering=None,
                  cmap=None, symmetric = True):
